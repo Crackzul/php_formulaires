@@ -119,26 +119,91 @@
         <input type="submit" value="Entrez">
     </form>
     
-    <h1>Exercice 8</h1>
 
-    <fieldset>
-  <legend>Select a maintenance drone:</legend>
+    <h1>Exercice 8 : Quizz</h1>
 
-  <div>
-    <input type="radio" id="plat" name="plat" value="plat" checked />
-    <label for="saison">Quel est ton plat préféré ?</label>
-  </div>
+<form method="post" action="">
+  <fieldset>
+    <legend>1. Quel est ton plat préféré ?</legend>
+    <input type="radio" name="q1" id="pizza" value="Pizza" required>
+    <label for="pizza">Pizza</label><br>
 
-  <div>
-    <input type="radio" id="dewey" name="saison" value="saison" />
-    <label for="saison">Quel est ta saison préféré</label>
-  </div>
+    <input type="radio" name="q1" id="pates" value="Pâtes">
+    <label for="pates">Pâtes</label><br>
 
-  <div>
-    <input type="radio" id="louie" name="color" value="color" />
-    <label for="color">Quel est ta couleur préférée</label>
-  </div>
-</fieldset>
+    <input type="radio" name="q1" id="tartiflette" value="Tartiflette">
+    <label for="tartiflette">Tartiflette</label><br>
+
+    <input type="radio" name="q1" id="sushi" value="Sushi">
+    <label for="sushi">Sushi</label><br>
+  </fieldset>
+
+  <fieldset>
+    <legend>2. Quelle est ta saison préférée ?</legend>
+    <input type="radio" name="q2" id="printemps" value="Printemps" required>
+    <label for="printemps">Printemps</label><br>
+
+    <input type="radio" name="q2" id="ete" value="Été">
+    <label for="ete">Été</label><br>
+
+    <input type="radio" name="q2" id="automne" value="Automne">
+    <label for="automne">Automne</label><br>
+
+    <input type="radio" name="q2" id="hiver" value="Hiver">
+    <label for="hiver">Hiver</label><br>
+  </fieldset>
+
+  <fieldset>
+    <legend>3. Quelle est ta couleur préférée ?</legend>
+    <input type="radio" name="q3" id="rouge" value="Rouge" required>
+    <label for="rouge">Rouge</label><br>
+
+    <input type="radio" name="q3" id="bleu" value="Bleu">
+    <label for="bleu">Bleu</label><br>
+
+    <input type="radio" name="q3" id="vert" value="Vert">
+    <label for="vert">Vert</label><br>
+
+    <input type="radio" name="q3" id="noir" value="Noir">
+    <label for="noir">Noir</label><br>
+  </fieldset>
+
+  <br>
+  <input type="submit" value="Valider le Quizz">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $score = 0;
+
+    
+    $reponses = [ // Mes réponses
+        "q1" => "Pizza",
+        "q2" => "Été",
+        "q3" => "Bleu"
+    ];
+
+  
+    foreach ($reponses as $question => $bonneReponse) {  // Comparaison avec les réponses données
+        if (isset($_POST[$question]) && $_POST[$question] === $bonneReponse) {
+            $score++;
+        }
+    }
+
+   
+    echo "<p>Tu as obtenu <strong>$score / 3</strong></p>"; // affiche le score
+
+    // Message selon le score
+    if ($score === 3) {
+        echo "<p style='color:green;'>Parfait !</p>";
+    } elseif ($score === 0) {
+        echo "<p style='color:red;'>Essai encore !</p>";
+    } else {
+        echo "<p>Pas mal, mais tu peux faire mieux</p>";
+    }
+}
+?>
+
 
 </body>
 </html>
